@@ -5,12 +5,21 @@
           <pesquisar-vaga></pesquisar-vaga>
         </div>
       </div>
-            
-      <div class="row mt-5" v-for="(vaga, index) in vagas" :key="index">
-        <div class="col">
-          <vaga-item v-bind="vaga"/>
-        </div>
-      </div>
+
+      <lista-vagas>
+        <!-- <template v-slot:titulo="slotProps">
+          {{ slotProps }}
+        </template>
+
+        <template v-slot:default="slotProps">
+          {{ slotProps }}
+        </template>
+
+        <template v-slot:rodape="slotProps">
+          {{ slotProps }}
+        </template> -->
+
+      </lista-vagas>
 
       <div class="row mt-5">
         <div class="col-4">
@@ -32,18 +41,17 @@
 <script>
   import PesquisarVaga from '@/components/comuns/PesquisarVaga.vue'
   import IndicadorItem from '@/components/comuns/IndicadorItem.vue'
-  import VagaItem from '@/components/comuns/VagaItem.vue'
+  import ListaVagas from '@/components/comuns/ListaVagas.vue'
 
   export default {
     name: 'HomeView',
     components: {
       PesquisarVaga,
       IndicadorItem,
-      VagaItem
+      ListaVagas,
     },
     data: ()=> ({
-      usuariosOnline: 0,
-      vagas: []
+      usuariosOnline: 0
     }),
     methods:{
       getUsuariosOnline() {
@@ -53,18 +61,6 @@
     created() {
       setInterval(this.getUsuariosOnline, 1000);
     },
-    activated() {
-      this.vagas = JSON.parse(localStorage.getItem('vagas'))
-    },
-    mounted() { 
-      this.emitter.on('filtrarVagas', (vaga)=> {
-        const vagas = JSON.parse(localStorage.getItem('vagas'));
-        const result = vagas.filter(reg => reg.titulo.toLowerCase().includes(vaga.titulo.toLowerCase()));
-        this.vagas = result;
-      });
-    }
+   
   }
 </script>
-
-<style scoped>
-</style>
