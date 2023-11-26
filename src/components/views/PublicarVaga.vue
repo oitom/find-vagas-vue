@@ -88,7 +88,42 @@ import PesquisarVaga from '@/components/comuns/PesquisarVaga.vue';
           publicacao: dataAtual.toISOString()
         });
 
-        localStorage.setItem('vagas', JSON.stringify(vagas));
+        if(this.validaForm()) {
+          localStorage.setItem('vagas', JSON.stringify(vagas));
+        
+          this.emitter.emit('alerta', {
+            titulo: `A vaga ${this.titulo}`,
+            descricao: 'Parabéns, a vaga foi cadastrada e poderá ser consultado por milhares de profissionais em nossa plataforma!',
+            tipo: 'sucesso'
+          });
+          
+          this.resetaForm();
+        }
+        else { 
+          this.emitter.emit('alerta', {
+            titulo: `Ops, não foi possivel realizar o cadastro!`,
+            descricao: 'Parece que você não preencheu algum campo :(',
+            tipo: 'erro'
+          });
+        }
+      },
+      validaForm() {
+        let valido = true;
+        if (this.titulo == '')  valido = false; 
+        if (this.descricao == '')   valido = false; 
+        if (this.salario == '')   valido = false; 
+        if (this.modalidade == '')   valido = false; 
+        if (this.tipo == '')   valido = false;
+        
+        return valido;
+      },
+      resetaForm() {
+        this.titulo = '';
+        this.descricao= '';
+        this.salario = '';
+        this.modalidade = '';
+        this.tipo = '';
+        this.publicacao = '';
       }
     },
   }
