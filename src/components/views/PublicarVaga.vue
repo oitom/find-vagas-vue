@@ -4,7 +4,10 @@
 </template>
 
 <script>
+  export default {
+    name: 'PublicarVagaView'
+  }
 </script>
 
-<style>
+<style scoped>
 </style>
