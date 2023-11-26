@@ -1,4 +1,4 @@
-# vagas-front
+# Find Vagas
 
 ## Project setup
 ```
