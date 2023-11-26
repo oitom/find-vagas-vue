@@ -1,7 +1,7 @@
 <template>
   <div>
-    <topo-padrao></topo-padrao>
-    <conteudo></conteudo>
+    <topo-padrao @navegar="componente = $event"></topo-padrao>
+    <conteudo :conteudo="componente"></conteudo>
   </div>
 </template>
 
@@ -14,7 +14,10 @@ export default {
   components: {
     Conteudo,
     TopoPadrao
-  }
+  },
+  data: () => ({
+    componente: 'Home'
+  })
 }
 </script>
 

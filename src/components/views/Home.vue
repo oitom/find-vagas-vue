@@ -43,8 +43,7 @@
     },
     data: ()=> ({
       usuariosOnline: 0,
-      vagas: require('@/assets/vagas.json')
-
+      vagas: []
     }),
     methods:{
       getUsuariosOnline() {
@@ -53,6 +52,9 @@
     },
     created() {
       setInterval(this.getUsuariosOnline, 1000);
+    },
+    activated() {
+      this.vagas = JSON.parse(localStorage.getItem('vagas'))
     }
   }
 </script>
